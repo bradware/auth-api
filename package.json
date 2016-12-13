@@ -1,0 +1,14 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend API for Moola",
+  "main": "node server.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "Brad Ware",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
