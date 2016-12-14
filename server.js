@@ -2,11 +2,15 @@
 
 require('rootpath')();
 
+// Required modules
 var express = require('express');
 var mongoose = require('mongoose');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+
+// Required routes
 var signupRoute = require('routes/signup');
+var loginRoute = require('routes/login');
 var port = process.env.PORT || 3000;
 
 // Create our Express application
@@ -15,10 +19,33 @@ var app = express();
 // Middleware
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+// app.use(bodyParser.urlencoded({extended: true}));
+
+// Mongo
+mongoose.connect('mongodb://localhost:27017/moola');
+var db = mongoose.connection;
+db.on('error', function(err) { console.error('Connection error to MoolaDB:', err); });
+db.once('open', function() { console.error('Connection successful to MoolaDB'); });
 
 // Register all our routes with /api/v1
 app.use('/api/v1', signupRoute);
+app.use('/api/v1', loginRoute);
 
-// Start the server
-app.listen(port);
+// Catch unused requests
+app.use(function(req, res, next) {
+	var err = new Error('Not Found');
+	err.status = 404;
+	next(err);
+});
+
+// Error handler, has to take in 4 params
+app.use(function(err, req, res, next) {
+	res.status(err.status || 500);
+	res.json({
+		error: {
+			message: err.message
+		}
+	});
+});
+
+app.listen(port, function() { console.log('Server is running on port', port); });
