@@ -39,6 +39,7 @@ router.post('/register', function(req, res, next) {
 		if (err) {
 			return next(err);
 		} else {
+			req.session.userID = user._id;
 			res.status(201);
 			res.json(newUser);
 		}

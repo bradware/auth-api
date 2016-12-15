@@ -31,6 +31,36 @@ var UserSchema = mongoose.Schema({
 	}]
 });
 
+// Authenticate user against database
+UserSchema.statics.authenticate = function(email, password, callback) {
+	User.findOne({email: email}).exec(function(error, user) {
+		if (error) {
+			// Mongo returned an error
+			callback(error);
+		} else if (!user) { 
+			// No user was found
+			var err = new Error('Email not found');
+			err.status = 401;
+			callback(err);
+		} else { 
+			// Found user so comparing password to hashed/salted version in Mongo
+			bcrypt.compare(password, user.password, function(error, result) {
+				if (result) {
+					// Password matched, returning the user
+					return callback(null, user);
+				} else {
+					// Password did not match the email
+					var err = new Error('Wrong password');
+					err.status = 401;
+					return callback(err, null);
+				}
+			});
+		}
+	});
+}
+
+
+// Hash & Salt password, ssn4 before saving to Mongo
 UserSchema.pre('save', function(next) {
 	// hash function will salt & hash password
 	var user = this;
@@ -39,14 +69,14 @@ UserSchema.pre('save', function(next) {
 			return next(err);
 		} else {
 			user.password = hash;
-		}
-	});
-	bcrypt.hash(user.account.ssn4, SALT_ROUNDS, function(err, hash) {
-		if (err) {
-			return next(err);
-		} else {
-			user.account.ssn4 = hash;
-			next();
+			bcrypt.hash(user.account.ssn4, SALT_ROUNDS, function(err, hash) {
+				if (err) {
+					return next(err);
+				} else {
+					user.account.ssn4 = hash;
+					next();
+				}
+			});
 		}
 	});
 });
