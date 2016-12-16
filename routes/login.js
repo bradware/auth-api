@@ -4,9 +4,10 @@ require('rootpath')();
 
 var express = require('express');
 var router = express.Router();
+var middleware = require('middleware');
 var User = require('models/user');
 
-router.use('/login', function(req, res, next) {
+router.use('/login', middleware.isLoggedOut, function(req, res, next) {
 	if (req.body.email && req.body.password) {
 		next();
 	} else {

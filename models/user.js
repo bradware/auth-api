@@ -59,10 +59,9 @@ UserSchema.statics.authenticate = function(email, password, callback) {
 	});
 }
 
-
 // Hash & Salt password, ssn4 before saving to Mongo
 UserSchema.pre('save', function(next) {
-	// hash function will salt & hash password
+	// Salts & hashes password
 	var user = this;
 	bcrypt.hash(user.password, SALT_ROUNDS, function(err, hash) {
 		if (err) {
