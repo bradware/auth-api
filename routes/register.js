@@ -5,9 +5,10 @@ require('rootpath')();
 var express = require('express');
 var router = express.Router();
 var middleware = require('middleware');
+var jwt = require('jsonwebtoken');
 var User = require('models/user');
 
-router.use('/register', middleware.isLoggedOut, function(req, res, next) {
+router.use('/register', function(req, res, next) {
 	if (req.body.first_name && req.body.last_name && req.body.date_of_birth && req.body.email && req.body.password && req.body.phone_number 
 	  && req.body.address && req.body.account) {
 		next();
@@ -41,8 +42,18 @@ router.post('/register', function(req, res, next) {
 			return next(err);
 		} else {
 			req.session.userID = user._id;
+			var token = jwt.sign(req.session.userID, 'moola-secret-token', {
+				expiresIn: 1800 // seconds for 30 minutes of time
+			});
 			res.status(201);
-			res.json(newUser);
+			res.json({
+				header: {
+					token: token
+				},
+				body: {
+					user: newUser
+				}
+			});
 		}
 	});
 });

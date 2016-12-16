@@ -5,6 +5,7 @@ require('rootpath')();
 var express = require('express');
 var router = express.Router();
 var middleware = require('middleware');
+var jwt = require('jsonwebtoken');
 var User = require('models/user');
 
 router.use('/login', middleware.isLoggedOut, function(req, res, next) {
@@ -24,8 +25,18 @@ router.post('/login', function(req, res, next) {
 		} else {
 			// Password matched
 			req.session.userID = user._id;
+			var token = jwt.sign(user, 'moola-secret-token', {
+				expiresIn: 1800 // seconds for 30 minutes of time
+			});
 			res.status(200);
-			res.json(user);
+			res.json({
+				header: {
+					token: token
+				},
+				body: {
+					user: user
+				}
+			});
 		}
 	});
 });

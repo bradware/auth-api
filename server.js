@@ -3,9 +3,9 @@
 require('rootpath')();
 
 // Required modules
-var port = process.env.PORT || 3000;
 var express = require('express');
 var mongoose = require('mongoose');
+var helmet = require('helmet');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var session = require('express-session');
@@ -15,6 +15,9 @@ var MongoStore = require('connect-mongo')(session);
 var registerRoute = require('routes/register');
 var loginRoute = require('routes/login');
 var logoutRoute = require('routes/logout');
+
+// Constants
+var port = process.env.PORT || 3000;
 
 // Create our Express application
 var app = express();
@@ -28,13 +31,14 @@ db.on('error', function(err) {
 	console.error('Connection error to Moola DB:', err); 
 });
 
-// Session management setup
+// Session & Token management setup
 var sess = {
   	secret: 'moola-secret-key',
+  	name: 'sessionID',
 	resave: false,
 	saveUninitialized: false,
 	store: new MongoStore({mongooseConnection: db}),
-	cookie: {maxAge: 600000}
+	cookie: {maxAge: 300000}
 };
 if (app.get('env') === 'production') {
   app.set('trust proxy', 1) // trust first proxy
@@ -47,6 +51,7 @@ app.use(function(req, res, next) {
 	res.locals.currentUser = req.session.userID;
 	next();
 });
+app.use(helmet());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -65,6 +70,7 @@ app.use(function(req, res, next) {
 
 // Error handler, has to take in 4 params
 app.use(function(err, req, res, next) {
+	console.log(err);
 	res.status(err.status || 500);
 	res.json({
 		error: {
