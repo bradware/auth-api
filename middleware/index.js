@@ -24,7 +24,6 @@ function isLoggedOut(req, res, next) {
 
 function authorizeToken(req, res, next) {
 	// check header or url parameters or post parameters for token
-	console.log('in here');
   	var token = req.body.token || req.query.token || req.headers['token'];
   	// decode token
   	if (token) {

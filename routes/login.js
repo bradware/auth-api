@@ -24,10 +24,12 @@ router.post('/login', function(req, res, next) {
 			next(error);
 		} else {
 			// Password matched
-			req.session.userID = user._id;
-			var token = jwt.sign(user, 'moola-secret-token', {
-				expiresIn: 1800 // seconds for 30 minutes of time
-			});
+			req.session.userID = user.email;
+			var token = jwt.sign({
+				data: user.email,
+				expiresIn: 1800 }, 
+				'moola-secret-token'
+			);
 			res.status(200);
 			res.json({
 				header: {
