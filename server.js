@@ -42,7 +42,7 @@ app.use(cookieParser());
 
 // Session & Token management setup
 var sess = {
-  	secret: 'moola-secret-key',
+  secret: 'moola-secret-key',
 	resave: true,
 	saveUninitialized: false,
 	store: new MongoStore({mongooseConnection: db}),
