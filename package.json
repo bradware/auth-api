@@ -2,7 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "Backend API for Moola",
-  "main": "server",
+  "main": "server.js",
   "scripts": {
     "test": "npm test"
   },
