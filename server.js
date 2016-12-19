@@ -16,6 +16,7 @@ var MongoStore = require('connect-mongo')(session);
 var registerRoute = require('routes/register');
 var loginRoute = require('routes/login');
 var logoutRoute = require('routes/logout');
+var randomRoute = require('routes/random');
 
 // Constants
 var port = process.env.PORT || 3000;
@@ -27,7 +28,7 @@ var app = express();
 // MongoDB setup
 var mongodb_uri = 'mongodb://heroku_grfxx7hr:ea1fneah7mialm43dfk7e8m3lj@ds139438.mlab.com:39438/heroku_grfxx7hr';
 var mongodb_local_uri = 'mongodb://localhost:27017/moola';
-mongoose.connect(mongodb_uri);
+mongoose.connect(mongodb_local_uri);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 
@@ -64,6 +65,7 @@ app.use(function(req, res, next) {
 app.use(route_prefix, registerRoute);
 app.use(route_prefix, loginRoute);
 app.use(route_prefix, logoutRoute);
+app.use(route_prefix, randomRoute);
 
 // Catch unused requests
 app.use(function(req, res, next) {
