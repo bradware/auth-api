@@ -27,7 +27,7 @@ var app = express();
 // MongoDB setup
 var mongodb_uri = 'mongodb://heroku_grfxx7hr:ea1fneah7mialm43dfk7e8m3lj@ds139438.mlab.com:39438/heroku_grfxx7hr';
 var mongodb_local_uri = 'mongodb://localhost:27017/moola';
-mongoose.connect(mongo_uri);
+mongoose.connect(mongodb_uri);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 
