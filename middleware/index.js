@@ -27,17 +27,17 @@ function authorizeToken(req, res, next) {
 	var token = req.query.token || req.headers['token'];
 	// decode token
 	if (token) {
-	    // verifies secret and checks exp
-	    jwt.verify(token, 'moola-secret-token', function(err, decoded) {      
-	      if (err) {
-	      	var err = new Error('Failed to authorize token');
-				err.status = 401;
-				return next(err);  
-	      } else {
-	        req.decoded = decoded;    
-	        next();
-	      }
-	    });
+    // verifies secret and checks exp
+    jwt.verify(token, 'moola-secret-token', function(err, decoded) {      
+      if (err) {
+      	var err = new Error('Failed to authorize token');
+			err.status = 401;
+			return next(err);  
+      } else {
+        req.decoded = decoded;    
+        next();
+      }
+    });
 	} else {
 		var err = new Error('No token provided');
 		err.status = 403;
