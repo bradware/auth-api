@@ -28,7 +28,7 @@ var app = express();
 // MongoDB setup
 var mongodb_uri = 'mongodb://heroku_grfxx7hr:ea1fneah7mialm43dfk7e8m3lj@ds139438.mlab.com:39438/heroku_grfxx7hr';
 var mongodb_local_uri = 'mongodb://localhost:27017/moola';
-mongoose.connect(mongodb_local_uri);
+mongoose.connect(mongodb_uri);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 
@@ -49,7 +49,7 @@ var sess = {
 	resave: true,
 	saveUninitialized: false,
 	store: new MongoStore({mongooseConnection: db}),
-	cookie: {maxAge: 300000}
+	cookie: {maxAge: 900000} // 15 minute expiration for session
 };
 if (app.get('env') === 'production') {
   app.set('trust proxy', 1) // trust first proxy

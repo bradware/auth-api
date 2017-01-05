@@ -42,11 +42,7 @@ router.post('/register', function(req, res, next) {
 			return next(err);
 		} else {
 			req.session.userID = newUser.email;
-			var token = jwt.sign({
-				data: newUser.email,
-				expiresIn: 1800 }, 
-				'moola-secret-token'
-			);
+			var token = jwt.sign({data: newUser.email}, 'moola-secret-token', {expiresIn: '1h'});
 			res.status(201);
 			res.json({
 				header: {
