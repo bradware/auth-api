@@ -50,10 +50,11 @@ var sess = {
 	store: new MongoStore({mongooseConnection: db}),
 	cookie: {maxAge: 3600000} // 60 minute expiration for session
 };
+/** No need for this and doesn't work when using personal domain through heroku deployment 
 if (app.get('env') === 'production') {
   app.set('trust proxy', 1) // trust first proxy
   sess.cookie.secure = true // serve secure cookies
-}
+}*/
 
 app.use(session(sess));
 app.use(function(req, res, next) {
