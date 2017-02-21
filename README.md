@@ -1,5 +1,5 @@
 # Auth API
-Mobile web application for consuming media content with friends and family. Deployed at [kelso.bradware.com](//kelso.bradware.com)
+RESTful backend auth API. Deployed at [auth-api.bradware.com](//auth-api.bradware.com)
 
 ## Technologies
 * [Node.js](//nodejs.org/en)
