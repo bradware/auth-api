@@ -25,7 +25,7 @@ router.post('/login', function(req, res, next) {
 		} else {
 			// Password matched
 			req.session.userID = user.email;
-			var token = jwt.sign({data: user.email}, 'moola-secret-token', {expiresIn: '1h'});
+			var token = jwt.sign({data: user.email}, 'very-secret-token', {expiresIn: '1h'});
 			res.status(200);
 			res.json({
 				header: {

@@ -1,7 +1,7 @@
 {
-  "name": "backend",
+  "name": "Auth API",
   "version": "1.0.0",
-  "description": "Backend API for Moola",
+  "description": "Generic backend for an auth API",
   "main": "server.js",
   "scripts": {
     "test": "npm test"

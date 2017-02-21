@@ -20,14 +20,14 @@ var randomRoute = require('routes/random');
 
 // Constants
 var port = process.env.PORT || 3000;
-var route_prefix = '/api/v1';
+var route_prefix = '/api';
 
 // Create our Express application
 var app = express();
 
 // MongoDB setup
-var mongodb_uri = 'mongodb://heroku_grfxx7hr:ea1fneah7mialm43dfk7e8m3lj@ds139438.mlab.com:39438/heroku_grfxx7hr';
-var mongodb_local_uri = 'mongodb://localhost:27017/moola';
+var mongodb_local_uri = 'mongodb://localhost:27017/auth';
+var mongodb_uri = process.env.MONGODB_URI || mongodb_local_uri;
 mongoose.connect(mongodb_uri);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
@@ -45,11 +45,11 @@ app.use(cookieParser());
 
 // Session & Token management setup
 var sess = {
-  secret: 'moola-secret-key',
+  secret: 'very-secret-key',
 	resave: true,
 	saveUninitialized: false,
 	store: new MongoStore({mongooseConnection: db}),
-	cookie: {maxAge: 900000} // 15 minute expiration for session
+	cookie: {maxAge: 3600000} // 60 minute expiration for session
 };
 if (app.get('env') === 'production') {
   app.set('trust proxy', 1) // trust first proxy
