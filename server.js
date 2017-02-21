@@ -20,7 +20,6 @@ var randomRoute = require('routes/random');
 
 // Constants
 var port = process.env.PORT || 3000;
-var route_prefix = '/api';
 
 // Create our Express application
 var app = express();
@@ -57,11 +56,11 @@ app.use(function(req, res, next) {
 	next();
 });
 
-// Connect all our routes with /api/v1
-app.use(route_prefix, registerRoute);
-app.use(route_prefix, loginRoute);
-app.use(route_prefix, logoutRoute);
-app.use(route_prefix, randomRoute);
+// Connect all our routes
+app.use(registerRoute);
+app.use(loginRoute);
+app.use(logoutRoute);
+app.use(randomRoute);
 
 // Catch unused requests
 app.use(function(req, res, next) {

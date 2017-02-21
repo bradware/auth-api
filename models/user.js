@@ -63,14 +63,7 @@ UserSchema.pre('save', function(next) {
 			return next(err);
 		} else {
 			user.password = hash;
-			bcrypt.hash(user.account.ssn4, SALT_ROUNDS, function(err, hash) {
-				if (err) {
-					return next(err);
-				} else {
-					user.account.ssn4 = hash;
-					next();
-				}
-			});
+			next();
 		}
 	});
 });
