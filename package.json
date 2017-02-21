@@ -1,5 +1,5 @@
 {
-  "name": "Auth API",
+  "name": "Auth-API",
   "version": "1.0.0",
   "description": "Generic auth API backend",
   "main": "server.js",
@@ -7,6 +7,14 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Brad Ware",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bradware/auth-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bradware/auth-api/issues"
+  },
+  "homepage": "https://github.com/bradware/auth-api#readme",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^1.0.1",
