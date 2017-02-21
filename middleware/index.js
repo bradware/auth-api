@@ -28,7 +28,7 @@ function authorizeToken(req, res, next) {
 	// decode token
 	if (token) {
     // verifies secret and checks exp
-    jwt.verify(token, 'moola-secret-token', function(err, decoded) {      
+    jwt.verify(token, 'very-secret-token', function(err, decoded) {      
       if (err) {
       	var err = new Error('Failed to authorize token');
 			err.status = 401;
