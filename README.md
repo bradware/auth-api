@@ -12,4 +12,4 @@ Mobile web application for consuming media content with friends and family. Depl
 * `cd auth-api`
 * `npm install`
 * `npm start`
-* visit `localhost:3000` in your browser or POSTMAN
+* visit `localhost:3000` in your browser or [Postman](//www.getpostman.com)
