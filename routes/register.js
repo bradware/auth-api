@@ -25,14 +25,6 @@ router.use('/register', function(req, res, next) {
 			err.status = 400;
 			return next(err);
 		}
-}, function(req, res, next) {
-		if (req.body.account.account_number && req.body.account.routing_number && req.body.account.ssn4) {
-			next();
-		} else {
-			var err = new Error('All account fields are requried to register');
-			err.status = 400;
-			return next(err);
-		}
 });
 
 router.post('/register', function(req, res, next) {

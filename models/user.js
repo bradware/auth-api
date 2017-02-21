@@ -18,11 +18,6 @@ var UserSchema = mongoose.Schema({
 		state: {type: String, required: true},
 		postal_code: {type: String, required: true, trim: true}
 	},
-	account: {
-		routing_number: {type: String, required: true, trim: true},
-		account_number: {type: String, required: true, trim: true},
-		ssn4: {type: String, required: true, trim: true}
-	},
 	children: [{
 		first_name: {type: String, required: true, trim: true},
 		last_name: {type: String, required: true, trim: true},
