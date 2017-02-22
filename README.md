@@ -16,11 +16,8 @@ RESTful backend auth API. Deployed at [auth-api.bradware.com](//auth-api.bradwar
 
 ## Endpoints
 
-### Root Endpoint
-#### [auth-api.bradware.com](//auth-api.bradware.com)
-
 ### Register Endpoint
-#### POST [auth-api.bradware.com/register](//auth-api.bradware.com/register)
+#### POST - [auth-api.bradware.com/register](//auth-api.bradware.com/register)
 #### Sample Request
 ```json
 {
@@ -68,7 +65,7 @@ RESTful backend auth API. Deployed at [auth-api.bradware.com](//auth-api.bradwar
 ```
 
 ### Login Endpoint
-#### POST [auth-api.bradware.com/login](//auth-api.bradware.com/login)
+#### POST - [auth-api.bradware.com/login](//auth-api.bradware.com/login)
 #### Sample Request
 ```json
 {
@@ -106,7 +103,7 @@ RESTful backend auth API. Deployed at [auth-api.bradware.com](//auth-api.bradwar
 ```
 
 ### Logout Endpoint
-#### GET [auth-api.bradware.com/logout](//auth-api.bradware.com/logout)
+#### GET - [auth-api.bradware.com/logout](//auth-api.bradware.com/logout)
 Can either be a raw JSON or x-www-form-urlencoded body request
 #### Sample Request
 HEADERS
@@ -128,7 +125,7 @@ OR
 ```
 
 ### Random Endpoint
-#### GET [auth-api.bradware.com/random](//auth-api.bradware.com/random)
+#### GET - [auth-api.bradware.com/random](//auth-api.bradware.com/random)
 Can either be a raw JSON or x-www-form-urlencoded body request
 #### Sample Request
 HEADERS
