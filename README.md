@@ -1,4 +1,4 @@
-# Auth API
+# Authentication API
 Generic backend RESTful authentication API. Deployed at [auth-api.bradware.com](//auth-api.bradware.com)
 
 ## Technologies
