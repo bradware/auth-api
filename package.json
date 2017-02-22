@@ -1,7 +1,7 @@
 {
-  "name": "Auth-API",
+  "name": "Authentication-API",
   "version": "1.0.0",
-  "description": "Generic auth API backend",
+  "description": "Generic authentication API backend",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
