@@ -17,13 +17,7 @@ var UserSchema = mongoose.Schema({
 		city: {type: String, required: true, trim: true},
 		state: {type: String, required: true},
 		postal_code: {type: String, required: true, trim: true}
-	},
-	children: [{
-		first_name: {type: String, required: true, trim: true},
-		last_name: {type: String, required: true, trim: true},
-		date_of_birth: {type: String, required: true},
-		created_at: {type: Date, default: Date.now}
-	}]
+	}
 });
 
 // Authenticate user against database

@@ -32,7 +32,7 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 
 db.on('error', function(err) { 
-	console.error('Connection error to Moola DB:', err); 
+  console.error('Connection error to Moola DB:', err); 
 });
 
 // Middleware setup
@@ -45,10 +45,10 @@ app.use(cookieParser());
 // Session & Token management setup
 var sess = {
   secret: 'very-secret-key',
-	resave: true,
-	saveUninitialized: false,
-	store: new MongoStore({mongooseConnection: db}),
-	cookie: {maxAge: 3600000} // 60 minute expiration for session
+  resave: true,
+  saveUninitialized: false,
+  store: new MongoStore({mongooseConnection: db}),
+  cookie: {maxAge: 3600000} // 60 minute expiration for session
 };
 /** No need for this and doesn't work when using personal domain through heroku deployment
 if (app.get('env') === 'production') {
@@ -58,8 +58,8 @@ if (app.get('env') === 'production') {
 
 app.use(session(sess));
 app.use(function(req, res, next) {
-	res.locals.currentUser = req.session.userID;
-	next();
+  res.locals.currentUser = req.session.userID;
+  next();
 });
 
 // Connect all our routes
@@ -70,21 +70,21 @@ app.use(randomRoute);
 
 // Catch unused requests
 app.use(function(req, res, next) {
-	var err = new Error('Not Found');
-	err.status = 404;
-	next(err);
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
 // Error handler, has to take in 4 params
 app.use(function(err, req, res, next) {
-	res.status(err.status || 500);
-	res.json({
-		error: {
-			message: err.message
-		}
-	});
+  res.status(err.status || 500);
+  res.json({
+    error: {
+      message: err.message
+    }
+  });
 });
 
 app.listen(port, function() { 
-	console.log('Server is running on port', port); 
+  console.log('Server is running on port', port); 
 });
