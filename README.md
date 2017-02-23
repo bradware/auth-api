@@ -1,5 +1,5 @@
 # Authentication API
-Generic backend RESTful authentication API. Deployed at [auth-api.bradware.com](//auth-api.bradware.com)
+Generic RESTful authentication API. Deployed at [auth-api.bradware.com](//auth-api.bradware.com)
 
 ## Technologies
 * [Node.js](//nodejs.org/en)
