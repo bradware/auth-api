@@ -8,7 +8,7 @@ var middleware = require('middleware');
 var RANDOM_LENGTH = 10;
 
 router.get('/random', [middleware.isLoggedIn, middleware.authorizeToken], function(req, res, next) {
-	var token = req.query.token || req.headers['token'];
+  var token = req.query.token || req.headers['token'];
   res.status(200);
   res.json({
     header: {
